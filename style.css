@@ -105,6 +105,11 @@ section {
   scroll-margin-top: 20px;
 }
 
+.inner-page {
+  min-height: calc(100vh - 110px);
+  padding-top: 92px;
+}
+
 .hero {
   min-height: 72vh;
   display: flex;
@@ -142,6 +147,12 @@ h1 {
   font-size: clamp(54px, 8vw, 86px);
   line-height: 1;
   letter-spacing: -0.045em;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 64px);
+  letter-spacing: -0.035em;
 }
 
 h2 {
@@ -338,6 +349,87 @@ footer {
   font-size: 12px;
 }
 
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.page-loader {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  background: rgba(246, 249, 251, 0.96);
+  opacity: 0;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.page-loader span {
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--line);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: loader-spin 700ms linear infinite;
+}
+
+.js body:not(.is-ready) .page-content {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+body.is-leaving .page-content {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+body.is-leaving .page-loader {
+  visibility: visible;
+  opacity: 1;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-content,
+  .page-loader {
+    transition: none;
+  }
+
+  .page-loader span {
+    animation: none;
+  }
+}
+
 @media (max-width: 840px) {
   .sidebar {
     position: relative;
@@ -388,6 +480,11 @@ footer {
   .hero {
     min-height: auto;
   }
+
+  .inner-page {
+    min-height: auto;
+    padding-top: 58px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -412,6 +509,10 @@ footer {
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .contact-links {
+    grid-template-columns: 1fr;
+  }
 }
 .quick-links a {
   display: inline-flex;
@@ -419,16 +520,6 @@ footer {
   gap: 7px;
 }
 
-.quick-links img {
-  width: 17px;
-  height: 17px;
-  object-fit: contain;
-}
-
-.email-icon {
-  font-size: 18px;
-  line-height: 1;
-}
 .quick-links {
   display: flex;
   align-items: center;
