@@ -429,3 +429,38 @@ footer {
   font-size: 18px;
   line-height: 1;
 }
+.quick-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.quick-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.quick-links i {
+  font-size: 20px;
+}
+
+.quick-links .fa-linkedin {
+  color: #0a66c2;
+}
+
+.quick-links .fa-github {
+  color: #181717;
+}
+
+.quick-links .fa-orcid {
+  color: #a6ce39;
+}
+
+.quick-links .fa-envelope {
+  color: #2878a5;
+}
